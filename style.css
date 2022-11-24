@@ -1,7 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  height: 100%;
+}
+
 ul {
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */
   margin: 0; /* Remove margins */
+}
+
+a {
+  text-decoration: none;
 }
 
 main {
@@ -34,9 +45,7 @@ main {
 
 .rotation-wrapper {
   box-sizing: content-box;
-
   display: flex;
-  background-color: aqua;
 }
 
 .text-rotation-container {
@@ -76,10 +85,16 @@ main {
   }
 }
 
+#icon-container {
+  display: flex;
+}
 .icon-box {
   border: solid 1px;
 }
 .devicon img {
   height: 4rem;
   width: 4rem;
+}
+
+.project-img img {
 }
