@@ -28,8 +28,7 @@ function App() {
     },
     {
       name: "Styled-components",
-      srclink:
-        "https://raw.githubusercontent.com/styled-components/brand/master/styled-components.png",
+      srclink: "https://www.styled-components.com/atom.png",
     },
     {
       name: "Java",
@@ -63,6 +62,7 @@ function App() {
     },
   ];
 
+  //02 Section
   const mappedIcon = iconCollection
     .map(
       (el) =>
@@ -74,6 +74,26 @@ function App() {
     .join("");
 
   document.querySelector("#icon-container").innerHTML = mappedIcon;
+
+  //03 Section Carousel
+  const carousel = document.querySelector(".carousel-container");
+  let carouselWidth = carousel.clientWidth;
+  const prevBtn = document.querySelector(".slide_prev_button");
+  const nextBtn = document.querySelector(".slide_next_button");
+
+  const carouselItems = document.querySelectorAll(".carousel-item");
+  const maxCarousel = carouselItems.length;
+
+  let currentCarousel = 1;
+
+  const pagination = document.querySelector(".slide_pagination");
+  for (let i = 0; i < maxSlide; i++) {
+    if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
+    else pagination.innerHTML += `<li>•</li>`;
+  }
+
+  const paginationItems = document.querySelectorAll(".slide_pagination > li");
+  console.log(paginationItems);
 }
 
 App();
