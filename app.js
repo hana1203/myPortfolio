@@ -77,23 +77,79 @@ function App() {
 
   //03 Section Carousel
   const carousel = document.querySelector(".carousel-container");
-  let carouselWidth = carousel.clientWidth;
+  let carouselWidth = carousel.offsetWidth; //캐러셀컨테이너가 차지하고있는 전체너비 //left 0으로 시작했다가 컨테이너 너비만큼 왼쪽, 오른쪽으로 움직여야하므로 필요
+  console.log(carouselWidth);
   const prevBtn = document.querySelector(".slide_prev_button");
   const nextBtn = document.querySelector(".slide_next_button");
 
   const carouselItems = document.querySelectorAll(".carousel-item");
   const maxCarousel = carouselItems.length;
+  let currCarousel = 1;
 
-  let currentCarousel = 1;
-
+  //페이지네이션 생성
   const pagination = document.querySelector(".slide_pagination");
-  for (let i = 0; i < maxSlide; i++) {
+
+  for (let i = 0; i < maxCarousel; i++) {
     if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
     else pagination.innerHTML += `<li>•</li>`;
   }
 
   const paginationItems = document.querySelectorAll(".slide_pagination > li");
   console.log(paginationItems);
+
+  //오른쪽 버튼에 클릭 이벤트 추가
+  nextBtn.addEventListener("click", () => {
+    currCarousel++;
+    if (currCarousel <= maxCarousel) {
+      const offset = carouselWidth * (currCarousel - 1);
+      //각 캐러셀 아이템 left에 offset적용
+      carouselItems.forEach((el) =>
+        el.setAttribute("style", `left: ${-offset}px`)
+      );
+      //슬라이드 이동시 현재 활성화된 페이지네이션 변경
+      paginationItems.forEach((el) => el.classList.remove("active"));
+      paginationItems[currCarousel - 1].classList.add("active");
+    } else {
+      currCarousel--;
+    }
+  });
+
+  //왼쪽 버튼에 이벤트 추가
+  prevBtn.addEventListener("click", () => {
+    currCarousel--;
+    if (currCarousel > 0) {
+      const offset = carouselWidth * (currCarousel - 1);
+      carouselItems.forEach((el) =>
+        el.setAttribute("style", `left: ${-offset}px`)
+      );
+      paginationItems.forEach((el) => el.classList.remove("active"));
+      paginationItems[currCarousel - 1].classList.add("active");
+    } else {
+      currCarousel++;
+    }
+  });
+
+  // 브라우저 크기 변경시 이에 맞는 캐러셀 너비로 리사이즈
+  window.addEventListener("resize", () => {
+    carouselWidth = carousel.offsetWidth;
+  });
+
+  //페이지네이션 dot 클릭으로 이동
+  for (let i = 0; i < maxCarousel; i++) {
+    //페이지네이션 li요소에 클릭이벤트 추가
+    paginationItems[i].addEventListener("click", () => {
+      currCarousel = i + 1;
+      // 슬라이드를 이동시키기 위한 offset 계산
+      const offset = carouselWidth * (currCarousel - 1);
+      // 각 슬라이드 아이템의 left에 offset 적용
+      carouselItems.forEach((el) =>
+        el.setAttribute("style", `left: ${-offset}px`)
+      );
+      // 슬라이드 이동 시 현재 활성화된 pagination 변경
+      paginationItems.forEach((el) => el.classList.remove("active"));
+      paginationItems[currCarousel - 1].classList.add("active");
+    });
+  }
 }
 
 App();
