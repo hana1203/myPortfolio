@@ -91,7 +91,7 @@ section {
   max-width: 1000px;
 }
 
-/* each section */
+/* 02 section */
 #about {
   display: flex;
   flex-direction: column;
@@ -115,42 +115,58 @@ section {
   margin: 10px;
 }
 
-.project-img img {
-}
-
+/* 03 Section */
 .project-container {
   display: flex;
   flex-direction: row;
 }
 .carousel-container {
+  flex-basis: 60%;
   display: flex;
   flex-wrap: nowrap;
   overflow: hidden;
   position: relative;
-  width: 100%;
+  width: 32rem;
+  height: 22rem;
+}
+
+.project-content {
+  flex-basis: 40%;
 }
 
 .carousel-item {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* 이미지 감싸고 있는 박스 크기 */
+  width: 100%;
+  height: 100%;
+
   position: relative;
-  flex-shrink: 0;
+  /* left: 0px;  */
+  flex-shrink: 0; /* shrink 기본값 1이라 박스크기에 맞게 줄어드는데, 한개한개 아이템에 보여야하므로 줄어들지않게 0으로 설정 */
   transition: left 0.15s;
 }
 
+.carousel-item > img {
+  width: 100%;
+  height: 100%;
+}
+
 .slide_button {
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  /* 버튼이 중앙에 위치하게 하기위해 계산 */
-  top: calc(50% - 16px);
 
-  width: 32px;
-  height: 32px;
+  position: absolute;
+  top: calc(50% - 1rem); /* 버튼이 중앙에 위치하게 하기위해 계산 */
+  width: 3rem;
+  height: 3rem;
+  color: grey; /* 투명하게 바꾸기 */
+  cursor: pointer;
 }
+
 .slide_prev_button {
   left: 10px;
 }
@@ -166,17 +182,17 @@ section {
   /* position */
   position: absolute;
   bottom: 0;
-  /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
-  left: 50%;
+  left: 50%; /* 가로 가운데로 위치 */
   transform: translateX(-50%);
 }
+
 .slide_pagination > li {
   /* 현재 슬라이드가 아닌 것은 투명도 부여 */
-  color: #7fb5ff88;
+  color: rgba(219, 219, 219, 0.6);
   cursor: pointer;
-  font-size: 25px;
+  font-size: 2rem;
 }
 .slide_pagination > li.active {
   /* 현재 슬라이드 색상은 투명도 없이 */
-  color: #7fb5ff;
+  color: #9e9e9e;
 }
