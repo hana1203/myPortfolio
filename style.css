@@ -196,3 +196,10 @@ section {
   /* 현재 슬라이드 색상은 투명도 없이 */
   color: #9e9e9e;
 }
+
+.tech-list::before {
+  content: "\f04b";
+  font: var(--fa-font-solid);
+  margin-right: 5px;
+  color: black;
+}

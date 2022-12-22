@@ -1,5 +1,5 @@
 function App() {
-  const iconCollection = [
+  const iconsData = [
     {
       name: "HTML",
       srclink:
@@ -63,7 +63,7 @@ function App() {
   ];
 
   //02 Section
-  const mappedIcon = iconCollection
+  const iconsMapped = iconsData
     .map(
       (el) =>
         `<div class="icon-box">
@@ -73,12 +73,95 @@ function App() {
     )
     .join("");
 
-  document.querySelector("#icon-container").innerHTML = mappedIcon;
+  document.querySelector("#icon-container").innerHTML = iconsMapped;
 
   //03 Section Carousel
+
+  const projectsData = [
+    {
+      id: 1,
+      idName: "fridge",
+      imgPath: [
+        "src/images/mainpgset.png",
+        "src/images/loginpg.png",
+        "src/images/modalsearchpg.png",
+        "src/images/myprofilepg.png",
+        "src/images/myrecipepg.png",
+      ],
+      projectName: "Fridge for living on their own",
+      projectDesc:
+        "Cooking recipes app specializing in people living alone. It recommends recipes based on ingredients they have in their fridge.",
+      projectSpec: "Code States final project (4 people / 5 weeks)",
+      techList: ["React", "Redux Toolkit", "Redux Persist", "Styled-component"],
+      projectLink: {
+        githubRepo: "https://www.seb39myfridge.ml/",
+        url: "https://github.com/codestates-seb/seb39_main_052",
+      },
+    },
+    {
+      id: 2,
+      idName: "companybot",
+      imgPath: [
+        "src/images/wbot_da.png",
+        "src/images/wbot_filter.png",
+        "src/images/wbot_login.png",
+      ],
+      projectName: "Automatic bot for billing system",
+      projectDesc:
+        "A Bot program to minimize simple, routine, and manual work at my previous company.",
+      projectSpec: "Myself (2 weeks)",
+      techList: ["Python", "Selenium"],
+      // projectLink: {
+      //   githubRepo: "",
+      //   url: "",
+      // },
+    },
+  ];
+
+  //js projectsData 데이터 개수만큼 project-container 마크업 만들기
+  const $projectContainer = projectsData
+    .map(
+      (el) =>
+        `<div class="project-container">
+          <div class="carousel-container">
+        ${el.imgPath
+          .map(
+            (elimg) => `<div class="carousel-item"><img src=${elimg} /></div>`
+          )
+          .join("")}
+        <div class="slide_prev_button slide_button"><i class="fa-solid fa-angle-left"></i> </div>
+        <div class="slide_next_button slide_button"><i class="fa-solid fa-angle-right"></i> </div>
+        <ul class="slide_pagination"></ul>
+          </div>
+          <div class="project-content">
+          <h3>${el.projectName}</h3>
+          <p>${el.projectDesc}</p>
+          <div>${el.projectSpec}</div>
+          <ul>
+          ${el.techList
+            .map((eltech) => `<li class="tech-list">${eltech}</li>`)
+            .join("")}
+          </ul>
+        ${
+          el.projectLink
+            ? `<div class="project-link">
+        <a href=${el.projectLink.githubRepo}><i class="fa-brands fa-github"></i></a>
+        <a href=${el.projectLink.url}><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+        </div>`
+            : ""
+        }
+      </div>
+    </div>`
+    )
+    .join("");
+
+  document
+    .querySelector("#work")
+    .insertAdjacentHTML("beforeend", $projectContainer);
+
   const carousel = document.querySelector(".carousel-container");
   let carouselWidth = carousel.offsetWidth; //캐러셀컨테이너가 차지하고있는 전체너비 //left 0으로 시작했다가 컨테이너 너비만큼 왼쪽, 오른쪽으로 움직여야하므로 필요
-  console.log(carouselWidth);
+  // console.log(carouselWidth);
   const prevBtn = document.querySelector(".slide_prev_button");
   const nextBtn = document.querySelector(".slide_next_button");
 
@@ -95,7 +178,7 @@ function App() {
   }
 
   const paginationItems = document.querySelectorAll(".slide_pagination > li");
-  console.log(paginationItems);
+  console.log("paginationItems", paginationItems);
 
   //오른쪽 버튼에 클릭 이벤트 추가
   nextBtn.addEventListener("click", () => {
