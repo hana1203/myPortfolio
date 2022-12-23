@@ -122,16 +122,20 @@ function App() {
   const $projectContainer = projectsData
     .map(
       (el) =>
-        `<div class="project-container">
-          <div class="carousel-container">
+        `<div class="project-container" id=id${el.id}>
+          <div class="carousel-container" id=id${el.id}>
         ${el.imgPath
           .map(
             (elimg) => `<div class="carousel-item"><img src=${elimg} /></div>`
           )
           .join("")}
-        <div class="slide_prev_button slide_button"><i class="fa-solid fa-angle-left"></i> </div>
-        <div class="slide_next_button slide_button"><i class="fa-solid fa-angle-right"></i> </div>
-        <ul class="slide_pagination"></ul>
+        <div class="slide_prev_button slide_button" id=id${
+          el.id
+        }><i class="fa-solid fa-angle-left"></i> </div>
+        <div class="slide_next_button slide_button" id=id${
+          el.id
+        }><i class="fa-solid fa-angle-right"></i> </div>
+        <ul class="slide_pagination" id=id${el.id}></ul>
           </div>
           <div class="project-content">
           <h3>${el.projectName}</h3>
@@ -159,29 +163,40 @@ function App() {
     .querySelector("#work")
     .insertAdjacentHTML("beforeend", $projectContainer);
 
-  const carousel = document.querySelector(".carousel-container");
+  const carousel = document.querySelector(".carousel-container"); //the first carousel node
   let carouselWidth = carousel.offsetWidth; //캐러셀컨테이너가 차지하고있는 전체너비 //left 0으로 시작했다가 컨테이너 너비만큼 왼쪽, 오른쪽으로 움직여야하므로 필요
   // console.log(carouselWidth);
-  const prevBtn = document.querySelector(".slide_prev_button");
-  const nextBtn = document.querySelector(".slide_next_button");
 
-  const carouselItems = document.querySelectorAll(".carousel-item");
+  let idStr = "id1";
+  const $prjContainer = document.querySelector(`#${idStr}`);
+  console.log("$prjContainer ", $prjContainer);
+
+  const $prevBtn = document.querySelector(`.slide_prev_button#${idStr}`); //class가 .slide이면서 id가 #ㅑ인 경우 AND 선택
+  console.log("$prevBtn", $prevBtn);
+  const $nextBtn = document.querySelector(`.slide_next_button#${idStr}`);
+
+  const carouselItems = document.querySelectorAll(
+    `.carousel-container#${idStr} > .carousel-item`
+  );
+  console.log("carouselItems", carouselItems); //한 개 box에 있는것만 잘 담김
   const maxCarousel = carouselItems.length;
   let currCarousel = 1;
 
   //페이지네이션 생성
-  const pagination = document.querySelector(".slide_pagination");
+  const pagination = document.querySelector(`.slide_pagination#${idStr}`);
 
   for (let i = 0; i < maxCarousel; i++) {
     if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
     else pagination.innerHTML += `<li>•</li>`;
   }
 
-  const paginationItems = document.querySelectorAll(".slide_pagination > li");
+  const paginationItems = document.querySelectorAll(
+    `.slide_pagination#${idStr} > li`
+  );
   console.log("paginationItems", paginationItems);
 
   //오른쪽 버튼에 클릭 이벤트 추가
-  nextBtn.addEventListener("click", () => {
+  $nextBtn.addEventListener("click", () => {
     currCarousel++;
     if (currCarousel <= maxCarousel) {
       const offset = carouselWidth * (currCarousel - 1);
@@ -198,7 +213,7 @@ function App() {
   });
 
   //왼쪽 버튼에 이벤트 추가
-  prevBtn.addEventListener("click", () => {
+  $prevBtn.addEventListener("click", () => {
     currCarousel--;
     if (currCarousel > 0) {
       const offset = carouselWidth * (currCarousel - 1);
