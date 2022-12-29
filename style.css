@@ -18,6 +18,51 @@ ul {
 
 a {
   text-decoration: none;
+  color: inherit;
+}
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+}
+.navbar-menu {
+  display: flex;
+}
+.nav-list {
+  margin-left: 2rem;
+  cursor: pointer;
+}
+.nav-list::before {
+  counter-increment: li;
+  content: "0" counter(li) ".";
+  margin-right: 10px;
+  font-family: "Nerko One", cursive;
+}
+
+.navbar-toggleBtn {
+  display: none;
+  position: absolute;
+  right: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-toggleBtn {
+    display: block;
+  }
+  .navbar {
+    background-color: aqua;
+  }
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+  .nav-list {
+    margin: 10px 0;
+  }
+  .navbar-menu.active {
+    display: flex;
+  }
 }
 
 .numbered-h2 {
@@ -47,6 +92,7 @@ a {
 .rotation-wrapper {
   box-sizing: content-box;
   display: flex;
+  /* height:  */
 }
 
 .text-rotation-container {

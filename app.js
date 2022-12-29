@@ -62,6 +62,14 @@ function App() {
     },
   ];
 
+  //header
+  const toggleBtn = document.querySelector(".navbar-toggleBtn");
+  const navbarMenu = document.querySelector(".navbar-menu");
+  toggleBtn.addEventListener("click", () => {
+    navbarMenu.classList.toggle("active");
+    toggleBtn.classList.toggle("active");
+  });
+
   //02 Section
   const iconsMapped = iconsData
     .map(
