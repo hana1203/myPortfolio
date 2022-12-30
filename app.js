@@ -116,7 +116,7 @@ function App() {
       ],
       projectName: "Automatic bot for billing system",
       projectDesc:
-        "A Bot program to minimize simple, routine, and manual work at my previous company.",
+        "A Bot program to minimize simple, routine, and manual work at my previous job.",
       projectSpec: "Myself (2 weeks)",
       techList: ["Python", "Selenium"],
       // projectLink: {
@@ -149,7 +149,7 @@ function App() {
           <h3>${el.projectName}</h3>
           <p>${el.projectDesc}</p>
           <div>${el.projectSpec}</div>
-          <ul>
+          <ul class="tech-list-ul">
           ${el.techList
             .map((eltech) => `<li class="tech-list">${eltech}</li>`)
             .join("")}
