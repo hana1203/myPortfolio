@@ -1,4 +1,6 @@
 function App() {
+  console.log = function no_console() {};
+
   const iconsData = [
     {
       name: "HTML",
