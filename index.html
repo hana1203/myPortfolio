@@ -44,8 +44,8 @@
           </div>
         </div>
       </section>
-      <section id="3dcanvas">
-        <canvas id="canvas" width="300" height="300"></canvas>
+      <section id="canvas3d">
+        <canvas id="canvas" width="320" height="300"></canvas>
       </section>
       <section id="about">
         <h2 class="numbered-h2">About Me</h2>
@@ -160,8 +160,8 @@
       }
     </script>
     <script type="module">
-      import { GLTFLoader } from "GLTFLoader";
       import * as THREE from "three";
+      import { GLTFLoader } from "GLTFLoader";
       import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
       const scene = new THREE.Scene();
@@ -169,23 +169,24 @@
         canvas: document.querySelector("#canvas"),
         antialias: true,
       });
-      //orbit control
-      // renderer.setSize(window.innerWidth, window.innerHeight);
-      // document.body.appendChild(renderer.domElement);
-
       renderer.outputEncoding = THREE.sRGBEncoding;
+      renderer.physicallyCorrectLights = true;
+
+      //orbit control
+      // renderer.setSize(innerWidth, innerHeight);
+      // document.body.appendChild(renderer.domElement);
 
       const camera = new THREE.PerspectiveCamera(30, 1);
       camera.position.set(0, 3, 35);
 
-      // const controls = new OrbitControls(camera, renderer.domElement);
-      // controls.update();
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.update();
 
-      // scene.background = new THREE.Color(); //흰 배경
       renderer.setClearColor(0xffffff, 0); //투명 배경
 
-      const light = new THREE.DirectionalLight(0xffffff, 1);
-      scene.add(light);
+      const dilight = new THREE.DirectionalLight(0xffffff, 1);
+      const amlight = new THREE.AmbientLight(0xffffff, 1);
+      scene.add(dilight, amlight);
 
       const loader = new GLTFLoader();
       loader.load("src/low_poly_winter_scene/scene.gltf", function (gltf) {
@@ -195,7 +196,7 @@
           //자동으로 회전
           gltf.scene.rotation.y += 0.001;
           //orbit control
-          // controls.update();
+          controls.update();
           renderer.render(scene, camera);
         }
         animate();
