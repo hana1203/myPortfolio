@@ -1,14 +1,22 @@
 import { iconsData, projectsData } from "./data.js";
 
 function App() {
-  console.log = function no_console() {};
-
+  // console.log = function no_console() {};
   //header
   const toggleBtn = document.querySelector(".navbar-toggleBtn");
   const navbarMenu = document.querySelector(".navbar-menu");
   toggleBtn.addEventListener("click", () => {
     navbarMenu.classList.toggle("active");
     toggleBtn.classList.toggle("active");
+  });
+
+  //nav-list 누르면 닫히기 - navbarMenu active 없애기
+  // const navList = document.querySelector(".nav-list"); //맨처음 요소만 선택되서 not working
+  //그 상위요소인 navbarMenu에 클릭이벤트를 주어 이벤트 위임
+  navbarMenu.addEventListener("click", () => {
+    navbarMenu.classList.remove("active");
+    console.log(navbarMenu.classList);
+    toggleBtn.classList.remove("active");
   });
 
   //02 Section
