@@ -207,6 +207,12 @@ h1 {
   display: flex;
   justify-content: center;
 }
+@media screen and (max-width: 768px) {
+  #canvas {
+    width: 320px;
+    height: 300px;
+  }
+}
 
 /* 01 About Me */
 .about-me-box {
