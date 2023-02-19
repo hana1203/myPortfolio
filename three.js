@@ -30,15 +30,21 @@ const amlight = new THREE.AmbientLight(0xffffff, 1);
 scene.add(dilight, amlight);
 
 const loader = new GLTFLoader();
-loader.load("src/low_poly_winter_scene/scene.gltf", function (gltf) {
-  scene.add(gltf.scene);
-  function animate() {
-    requestAnimationFrame(animate);
-    //자동으로 회전
-    gltf.scene.rotation.y += 0.001;
-    //orbit control
-    controls.update();
-    renderer.render(scene, camera);
+loader.load(
+  "src/low_poly_winter_scene/scene.gltf",
+  function (gltf) {
+    scene.add(gltf.scene);
+    function animate() {
+      requestAnimationFrame(animate);
+      //자동으로 회전
+      gltf.scene.rotation.y += 0.001;
+      //orbit control
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  },
+  function (error) {
+    console.log(error);
   }
-  animate();
-});
+);

@@ -1,7 +1,7 @@
 import { iconsData, projectsData } from "./data.js";
 
 function App() {
-  // console.log = function no_console() {};
+  console.log = function no_console() {};
   //header
   const toggleBtn = document.querySelector(".navbar-toggleBtn");
   const navbarMenu = document.querySelector(".navbar-menu");
